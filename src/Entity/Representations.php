@@ -18,7 +18,7 @@ class Representations
     private ?\DateTimeInterface $whene = null;
 
     #[ORM\ManyToOne]
-    private ?shows $show = null;
+    private ?Show $show = null;
 
     #[ORM\ManyToOne]
     private ?Location $location = null;
@@ -41,17 +41,17 @@ class Representations
     }
 
     /**
-     * @return shows|null
+     * @return Show|null
      */
-    public function getShow(): ?shows
+    public function getShow(): ?Show
     {
         return $this->show;
     }
 
     /**
-     * @param shows|null $show
+     * @param Show|null $show
      */
-    public function setShow(?shows $show): void
+    public function setShow(?Show $show): void
     {
         $this->show = $show;
     }

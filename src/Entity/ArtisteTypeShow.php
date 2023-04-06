@@ -19,7 +19,7 @@ class ArtisteTypeShow
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?shows $show = null;
+    private ?Show $show = null;
 
     public function getId(): ?int
     {
@@ -45,17 +45,17 @@ class ArtisteTypeShow
 
 
     /**
-     * @return shows|null
+     * @return Show|null
      */
-    public function getShow(): ?shows
+    public function getShow(): ?Show
     {
         return $this->show;
     }
 
     /**
-     * @param shows|null $show
+     * @param Show|null $show
      */
-    public function setShow(?shows $show): void
+    public function setShow(?Show $show): void
     {
         $this->show = $show;
     }

@@ -2,16 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ShowsRepository;
+use App\Repository\ShowRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Entity(repositoryClass: ShowsRepository::class)]
+#[ORM\Entity(repositoryClass: ShowRepository::class)]
+#[ORM\Table(name: "shows")]
 #[UniqueEntity("slug")]
-class Shows
+class Show
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,23 +31,15 @@ class Shows
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $posterUrl = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Location $location = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $bookable = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0', nullable: true)]
     private ?string $price = null;
 
-    /**
-     * @param Location|null $location
-     */
-    public function __construct(?Location $location)
-    {
-        $this->location = $location;
-    }
-
+    #[ORM\ManyToOne(targetEntity: Location::class,inversedBy: 'shows')]
+    #[ORM\JoinColumn(onDelete: "RESTRICT")]
+    private ?location $location = null;
 
     public function getId(): ?int
     {
@@ -101,21 +94,6 @@ class Shows
         return $this;
     }
 
-    /**
-     * @return Location|ArrayCollection|null
-     */
-    public function getLocation(): ArrayCollection|Location|null
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location|ArrayCollection|null $location
-     */
-    public function setLocation(ArrayCollection|Location|null $location): void
-    {
-        $this->location = $location;
-    }
 
     public function isBookable(): ?bool
     {
@@ -137,6 +115,18 @@ class Shows
     public function setPrice(?string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getLocation(): ?location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationsRepository;
+use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -33,6 +35,14 @@ class Location
 
     #[ORM\ManyToOne(targetEntity: Locality::class ,inversedBy: 'locations')]
     private ?locality $locality = null;
+
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Show::class)]
+    private Collection $shows;
+
+    public function __construct()
+    {
+        $this->shows = new ArrayCollection();
+    }
 
 
 
@@ -115,6 +125,36 @@ class Location
     public function setLocality(?locality $locality): self
     {
         $this->locality = $locality;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Show>
+     */
+    public function getShows(): Collection
+    {
+        return $this->shows;
+    }
+
+    public function addShow(Show $show): self
+    {
+        if (!$this->shows->contains($show)) {
+            $this->shows->add($show);
+            $show->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShow(Show $show): self
+    {
+        if ($this->shows->removeElement($show)) {
+            // set the owning side to null (unless already changed)
+            if ($show->getLocation() === $this) {
+                $show->setLocation(null);
+            }
+        }
 
         return $this;
     }
