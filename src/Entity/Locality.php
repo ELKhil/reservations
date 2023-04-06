@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\LocalitiesRepository;
+use App\Repository\LocalityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LocalitiesRepository::class)]
+#[ORM\Entity(repositoryClass: LocalityRepository::class)]
 #[ORM\Table(name: "localities")]
 class Locality
 {
