@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Localities;
+use App\Entity\Locality;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Localities>
+ * @extends ServiceEntityRepository<Locality>
  *
- * @method Localities|null find($id, $lockMode = null, $lockVersion = null)
- * @method Localities|null findOneBy(array $criteria, array $orderBy = null)
- * @method Localities[]    findAll()
- * @method Localities[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Locality|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Locality|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Locality[]    findAll()
+ * @method Locality[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LocalitiesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Localities::class);
+        parent::__construct($registry, Locality::class);
     }
 
-    public function save(Localities $entity, bool $flush = false): void
+    public function save(Locality $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class LocalitiesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Localities $entity, bool $flush = false): void
+    public function remove(Locality $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

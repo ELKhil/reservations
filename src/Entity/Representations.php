@@ -21,7 +21,7 @@ class Representations
     private ?shows $show = null;
 
     #[ORM\ManyToOne]
-    private ?locations $location = null;
+    private ?Location $location = null;
 
     public function getId(): ?int
     {
@@ -57,17 +57,17 @@ class Representations
     }
 
     /**
-     * @return locations|null
+     * @return Location|null
      */
-    public function getLocation(): ?locations
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
 
     /**
-     * @param locations|null $location
+     * @param Location|null $location
      */
-    public function setLocation(?locations $location): void
+    public function setLocation(?Location $location): void
     {
         $this->location = $location;
     }

@@ -7,8 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: LocationsRepository::class)]
+#[ORM\Table(name: "locations")]
 #[UniqueEntity("slug")]
-class Locations
+class Location
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,14 +25,14 @@ class Locations
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $website = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $phone = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?localities $locality = null;
 
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private ?string $slug = null;
+
+    #[ORM\ManyToOne(targetEntity: Locality::class ,inversedBy: 'locations')]
+    private ?locality $locality = null;
 
 
 
@@ -76,33 +77,23 @@ class Locations
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    /**
+     * @param string|null $phone
+     */
+    public function setPhone(?string $phone): void
     {
         $this->phone = $phone;
-
-        return $this;
     }
 
-    /**
-     * @return localities|null
-     */
-    public function getLocality(): ?localities
-    {
-        return $this->locality;
-    }
 
-    /**
-     * @param localities|null $locality
-     */
-    public function setLocality(?localities $locality): void
-    {
-        $this->locality = $locality;
-    }
 
     public function getSlug(): ?string
     {
@@ -116,6 +107,17 @@ class Locations
         return $this;
     }
 
+    public function getLocality(): ?locality
+    {
+        return $this->locality;
+    }
+
+    public function setLocality(?locality $locality): self
+    {
+        $this->locality = $locality;
+
+        return $this;
+    }
 
 
 

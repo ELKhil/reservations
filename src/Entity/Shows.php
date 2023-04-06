@@ -31,7 +31,7 @@ class Shows
     private ?string $posterUrl = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?locations $location = null;
+    private ?Location $location = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $bookable = null;
@@ -40,9 +40,9 @@ class Shows
     private ?string $price = null;
 
     /**
-     * @param locations|null $location
+     * @param Location|null $location
      */
-    public function __construct(?locations $location)
+    public function __construct(?Location $location)
     {
         $this->location = $location;
     }
@@ -102,17 +102,17 @@ class Shows
     }
 
     /**
-     * @return locations|ArrayCollection|null
+     * @return Location|ArrayCollection|null
      */
-    public function getLocation(): ArrayCollection|locations|null
+    public function getLocation(): ArrayCollection|Location|null
     {
         return $this->location;
     }
 
     /**
-     * @param locations|ArrayCollection|null $location
+     * @param Location|ArrayCollection|null $location
      */
-    public function setLocation(ArrayCollection|locations|null $location): void
+    public function setLocation(ArrayCollection|Location|null $location): void
     {
         $this->location = $location;
     }
