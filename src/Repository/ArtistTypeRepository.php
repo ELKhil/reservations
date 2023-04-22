@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ArtisteTypeShow;
+use App\Entity\ArtistType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ArtisteTypeShow>
+ * @extends ServiceEntityRepository<ArtistType>
  *
- * @method ArtisteTypeShow|null find($id, $lockMode = null, $lockVersion = null)
- * @method ArtisteTypeShow|null findOneBy(array $criteria, array $orderBy = null)
- * @method ArtisteTypeShow[]    findAll()
- * @method ArtisteTypeShow[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ArtistType|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ArtistType|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ArtistType[]    findAll()
+ * @method ArtistType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ArtisteTypeShowRepository extends ServiceEntityRepository
+class ArtistTypeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ArtisteTypeShow::class);
+        parent::__construct($registry, ArtistType::class);
     }
 
-    public function save(ArtisteTypeShow $entity, bool $flush = false): void
+    public function save(ArtistType $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ArtisteTypeShowRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ArtisteTypeShow $entity, bool $flush = false): void
+    public function remove(ArtistType $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ArtisteTypeShowRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ArtisteTypeShow[] Returns an array of ArtisteTypeShow objects
+//     * @return ArtistType[] Returns an array of ArtistType objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ArtisteTypeShowRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ArtisteTypeShow
+//    public function findOneBySomeField($value): ?ArtistType
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')

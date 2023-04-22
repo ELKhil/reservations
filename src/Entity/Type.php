@@ -19,7 +19,7 @@ class Type
     #[ORM\Column(length: 60)]
     private ?string $type = null;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'types')]
+    #[ORM\OneToMany(mappedBy: 'types', targetEntity: ArtistType::class)]
     private Collection $artists;
 
     public function __construct()
@@ -45,29 +45,34 @@ class Type
     }
 
     /**
-     * @return Collection<int, Artist>
+     * @return ArrayCollection|Collection
      */
-    public function getArtists(): Collection
+    public function getArtists(): ArrayCollection|Collection
     {
         return $this->artists;
     }
 
-    public function addArtist(Artist $artist): self
+    public function addArtist(ArtistType $artist): self
     {
         if (!$this->artists->contains($artist)) {
-            $this->artists->add($artist);
-            $artist->addType($this);
+            $this->artists[] = $artist;
+            $artist->setType($this);
         }
 
         return $this;
+
     }
 
-    public function removeArtist(Artist $artist): self
+    public function removeArtist(ArtistType $artist): self
     {
         if ($this->artists->removeElement($artist)) {
-            $artist->removeType($this);
+            // set the owning side to null (unless already changed)
+            if ($artist->getType() === $this) {
+                $artist->setType(null);
+            }
         }
 
         return $this;
+
     }
 }
