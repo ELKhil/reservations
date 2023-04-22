@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Artist;
 use App\Entity\Artists;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -27,11 +28,17 @@ class ArtistFixtures extends Fixture
         ];
 
         foreach ($artists as $record) {
-            $artist = new Artists();
+            $artist = new Artist();
             $artist->setFirstname($record['firstname']);
             $artist->setLastname($record['lastname']);
 
             $manager->persist($artist);
+
+            $this->addReference(
+                $record['firstname']."-".$record['lastname'],
+                $artist
+            );
+
         }
 
         $manager->flush();

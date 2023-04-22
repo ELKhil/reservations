@@ -13,9 +13,7 @@ class ArtisteTypeShow
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?artisteType $artisteType = null;
+
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -25,24 +23,6 @@ class ArtisteTypeShow
     {
         return $this->id;
     }
-
-    /**
-     * @return artisteType|null
-     */
-    public function getArtisteType(): ?artisteType
-    {
-        return $this->artisteType;
-    }
-
-    /**
-     * @param artisteType|null $artisteType
-     */
-    public function setArtisteType(?artisteType $artisteType): void
-    {
-        $this->artisteType = $artisteType;
-    }
-
-
 
     /**
      * @return Show|null

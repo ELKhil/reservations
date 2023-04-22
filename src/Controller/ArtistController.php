@@ -2,19 +2,20 @@
 
 namespace App\Controller;
 
-use App\Repository\ArtistsRepository;
+
+use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArtistController extends AbstractController
 {
-    private ArtistsRepository $artistsRepository;
+    private ArtistRepository $artistsRepository;
 
     /**
      * @param $artistsRepository
      */
-    public function __construct(ArtistsRepository $artistsRepository)
+    public function __construct(ArtistRepository $artistsRepository)
     {
         $this->artistsRepository = $artistsRepository;
     }

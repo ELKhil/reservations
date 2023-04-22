@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Types;
+use App\Entity\Type;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Types>
+ * @extends ServiceEntityRepository<Type>
  *
- * @method Types|null find($id, $lockMode = null, $lockVersion = null)
- * @method Types|null findOneBy(array $criteria, array $orderBy = null)
- * @method Types[]    findAll()
- * @method Types[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Type|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Type|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Type[]    findAll()
+ * @method Type[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TypesRepository extends ServiceEntityRepository
+class TypeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Types::class);
+        parent::__construct($registry, Type::class);
     }
 
-    public function save(Types $entity, bool $flush = false): void
+    public function save(Type $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TypesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Types $entity, bool $flush = false): void
+    public function remove(Type $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TypesRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Types[] Returns an array of Types objects
+//     * @return Type[] Returns an array of Type objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TypesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Types
+//    public function findOneBySomeField($value): ?Type
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')
