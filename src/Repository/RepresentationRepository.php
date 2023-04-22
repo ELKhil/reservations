@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Representations;
+use App\Entity\Representation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Representations>
+ * @extends ServiceEntityRepository<Representation>
  *
- * @method Representations|null find($id, $lockMode = null, $lockVersion = null)
- * @method Representations|null findOneBy(array $criteria, array $orderBy = null)
- * @method Representations[]    findAll()
- * @method Representations[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Representation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Representation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Representation[]    findAll()
+ * @method Representation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RepresentationsRepository extends ServiceEntityRepository
+class RepresentationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Representations::class);
+        parent::__construct($registry, Representation::class);
     }
 
-    public function save(Representations $entity, bool $flush = false): void
+    public function save(Representation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class RepresentationsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Representations $entity, bool $flush = false): void
+    public function remove(Representation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class RepresentationsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Representations[] Returns an array of Representations objects
+//     * @return Representation[] Returns an array of Representation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class RepresentationsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Representations
+//    public function findOneBySomeField($value): ?Representation
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')

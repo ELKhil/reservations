@@ -41,6 +41,14 @@ class Show
     #[ORM\JoinColumn(onDelete: "RESTRICT")]
     private ?location $location = null;
 
+    #[ORM\OneToMany(mappedBy: 'the_show', targetEntity: Representation::class, orphanRemoval: true)]
+    private Collection $representations;
+
+    public function __construct()
+    {
+        $this->representations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +135,36 @@ class Show
     public function setLocation(?location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Representation>
+     */
+    public function getRepresentations(): Collection
+    {
+        return $this->representations;
+    }
+
+    public function addRepresentation(Representation $representation): self
+    {
+        if (!$this->representations->contains($representation)) {
+            $this->representations->add($representation);
+            $representation->setTheShow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepresentation(Representation $representation): self
+    {
+        if ($this->representations->removeElement($representation)) {
+            // set the owning side to null (unless already changed)
+            if ($representation->getTheShow() === $this) {
+                $representation->setTheShow(null);
+            }
+        }
 
         return $this;
     }

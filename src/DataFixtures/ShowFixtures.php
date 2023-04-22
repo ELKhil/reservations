@@ -5,9 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\Show;
 use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ShowFixtures extends Fixture
+class ShowFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -72,6 +73,8 @@ class ShowFixtures extends Fixture
 
             $show->setBookable($record['bookable']);
             $show->setPrice($record['price']);
+
+            $this->addReference($show->getSlug(), $show);
 
             $manager->persist($show);
         }
