@@ -6,6 +6,7 @@ use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\True_;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 #[ORM\Table(name: "types")]
@@ -19,8 +20,8 @@ class Type
     #[ORM\Column(length: 60)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'types', targetEntity: ArtistType::class)]
-    private Collection $artists;
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: ArtistType::class, orphanRemoval: true)]
+    private $artists;
 
     public function __construct()
     {
@@ -45,9 +46,9 @@ class Type
     }
 
     /**
-     * @return ArrayCollection|Collection
+     * @return ArtistType[]|ArrayCollection
      */
-    public function getArtists(): ArrayCollection|Collection
+    public function getArtists()
     {
         return $this->artists;
     }

@@ -60,7 +60,6 @@ class Artist
     }
 
 
-
     public function addType(ArtistType $type): self
     {
         if (!$this->types->contains($type)) {
@@ -73,12 +72,14 @@ class Artist
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArtistType[]|ArrayCollection
      */
-    public function getTypes(): ArrayCollection
+    public function getTypes()
     {
         return $this->types;
     }
+
+
 
     public function removeType(ArtistType $type): self
     {
