@@ -16,39 +16,27 @@ class RoleUser
     private ?int $id = null;
 
     #[ORM\ManyToOne]
-    private ?roles $role = null;
+    private ?Role $role = null;
 
-    #[ORM\ManyToOne]
-    private ?users $user = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRole(): ?roles
+    public function getRole(): ?Role
     {
         return $this->role;
     }
 
-    public function setRole(?roles $role): self
+    public function setRole(?Role $role): self
     {
         $this->role = $role;
 
         return $this;
     }
 
-    public function getUser(): ?users
-    {
-        return $this->user;
-    }
-
-    public function setUser(?users $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
 
 

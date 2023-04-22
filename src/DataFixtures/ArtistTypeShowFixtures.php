@@ -133,7 +133,6 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
             ],
         ];
 
-
         foreach ($artistTypeShows as $record) {
             //Récupérer le spectacle (entité principale)
             $show = $this->getReference($record['show_slug']);
@@ -151,7 +150,8 @@ class ArtistTypeShowFixtures extends Fixture implements DependentFixtureInterfac
             $manager->persist($show);
         }
 
-            $manager->flush();
+
+        $manager->flush();
     }
 
     public function getDependencies()

@@ -11,6 +11,9 @@
             <li>{{ artistType.type.type }}</li>
         {% endfor %}
     </ul>
+    <div><a href="{{ path('artist_edit' , {'id': artist.id}) }}"> Modifier</a></div>
+
+    <nav><a href="{{ path('artist_index') }}">Retour à l'index</a></nav>
 {% endblock %}
 
 

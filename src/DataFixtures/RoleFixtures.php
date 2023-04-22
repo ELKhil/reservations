@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Roles;
+use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -14,15 +14,15 @@ class RoleFixtures extends Fixture
         // $manager->persist($product);
         $roles = [
             ["role" => 'admin'],
-            ["role" => 'member'],
-            ["role" => 'affiliate'],
+            ["role" => 'membre'],
         ];
 
         foreach ($roles as $record){
-            $role = new Roles();
+            $role = new Role();
             $role->setRole($record['role']);
-
             $manager->persist($role);
+
+            $this->addReference($record['role'], $role);
 
         }
 
